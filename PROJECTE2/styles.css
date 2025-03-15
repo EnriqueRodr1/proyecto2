@@ -1,0 +1,459 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* HEADER */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 40px;
+    background: white;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    transition: background 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Cambia el header al hacer scroll */
+header.scrolled {
+    background: black;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Logo */
+.logo img {
+    height: 50px;
+    width: auto;
+    max-width: 150px;
+}
+
+/* Menú de navegación */
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+/* Enlaces del menú */
+.nav-links a {
+    color: black;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s ease-in-out;
+    padding: 10px 15px;
+}
+
+.nav-links a:hover {
+    color: #f4a600;
+    transform: scale(1.1);
+}
+
+/* SLIDER PRINCIPAL */
+.slider {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.slider-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.slide {
+    min-width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+/* Botones del slider */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background 0.3s;
+    border-radius: 50%;
+}
+
+.prev:hover, .next:hover {
+    background: rgba(255, 165, 0, 0.8);
+}
+
+.prev { left: 20px; }
+.next { right: 20px; }
+
+/* SECCIÓN DE SERVICIOS (Nuevo Diseño) */
+.service-slider {
+    width: 100%;
+    max-width: 1200px;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.service-slide {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.service-slide:hover {
+    transform: scale(1.02);
+}
+
+/* Contenido del servicio */
+.service-content {
+    flex: 1;
+    padding: 40px;
+    text-align: left;
+}
+
+.service-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #222;
+}
+
+.service-content p {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.service-btn {
+    display: inline-block;
+    padding: 12px 20px;
+    background: #f4a600;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    transition: background 0.3s ease-in-out;
+}
+
+.service-btn:hover {
+    background: #ffcc00;
+}
+
+/* Imagen del servicio */
+.service-image {
+    flex: 1;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Alternar lados de imagen y texto */
+.service-slide:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+/* FOOTER */
+footer {
+    background: #222;
+    padding: 40px 20px;
+    color: white;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Redes sociales */
+.social-icons a {
+    color: white;
+    font-size: 24px;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+.social-icons a:hover {
+    color: #f4a600;
+}
+
+/* FORMULARIO DE CONTACTO */
+.contact-form {
+    max-width: 400px;
+    width: 100%;
+}
+
+.contact-form h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.contact-form button {
+    width: 100%;
+    padding: 12px;
+    background: #f4a600;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.contact-form button:hover {
+    background: #ffcc00;
+}
+
+/* ENLACES DEL FOOTER */
+.footer-links {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    margin: 5px 0;
+}
+
+.footer-links a:hover {
+    color: #f4a600;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    
+    .menu-btn {
+        display: block;
+    }
+    
+    .mobile-menu.show {
+        display: flex;
+    }
+
+    /* Ajustes responsive para servicios */
+    .service-slide {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .service-image {
+        width: 100%;
+        height: 250px;
+    }
+
+    .service-content {
+        padding: 20px;
+    }
+
+    .service-content h2 {
+        font-size: 2rem;
+    }
+
+    .service-content p {
+        font-size: 1rem;
+    }
+
+    .service-btn {
+        font-size: 1rem;
+    }
+
+    /* Ajustes para el footer en móvil */
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .social-icons {
+        margin-bottom: 20px;
+    }
+    
+    .contact-form {
+        margin-bottom: 20px;
+    }
+}
+
+
+/* Estilos para la sección de restaurantes */
+.restaurants {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    padding: 50px;
+    background: #e0c9a6;
+}
+
+.restaurant {
+    background: white;
+    width: 30%;
+    text-align: center;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.restaurant img {
+    width: 100%;
+    height: auto;
+}
+
+.restaurant-info {
+    padding: 20px;
+    color: #5b4221;
+}
+
+.restaurant-info h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.restaurant-info p {
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+.btn {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    color: white;
+    background: #8b6f47;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #a7895e;
+}
+
+.reserve-btn {
+    background: transparent;
+    border: 2px solid #8b6f47;
+    color: #8b6f47;
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px auto;
+    transition: 0.3s;
+}
+
+.reserve-btn:hover {
+    background: #8b6f47;
+    color: white;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .restaurants {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .restaurant {
+        width: 90%;
+    }
+}
+
+
+
+
+/* carta.html */
+.menu-container {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+}
+
+.menu-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.menu-category {
+    background: #fff;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.menu-category h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.menu-item {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.menu-item h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.menu-item p {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.price {
+    font-weight: bold;
+    color: #000;
+}
