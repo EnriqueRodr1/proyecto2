@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <a href="index.html"><img src="logo.svg" alt="Logo"></a>
+    </div>
+    <nav class="nav-links">
+        <a href="restaurantes.html">Restaurantes</a>
+        <a href="spa.html">Spa</a>
+        <a href="hoteles.html">Hoteles</a>
+        <a href="pistas.html">Pistas</a>
+    </nav>
+    <div class="icons">
+        <a href="socio.html">Área Socio</a>
+    </div>
+</header>
+
+<!-- SECCIÓN DE RESERVAS -->
+<section class="reserva-section">
+    <h2>Haz tu Reserva</h2>
+    <form class="reserva-form" onsubmit="guardarReserva(event)">
+        <label for="personas">Número de personas:</label>
+        <select id="personas" name="personas">
+            <option value="1">1 Persona</option>
+            <option value="2">2 Personas</option>
+            <option value="3">3 Personas</option>
+            <option value="4">4 Personas</option>
+            <option value="5">5 Personas</option>
+            <option value="6">6 o más</option>
+        </select>
+
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" name="fecha" required>
+
+        <label for="hora">Hora:</label>
+        <input type="time" id="hora" name="hora" required>
+
+        <button type="submit" class="reserva-btn">Confirmar Reserva</button>
+    </form>
+</section>
+
+<script>
+function guardarReserva(event) {
+    event.preventDefault(); // Evita que el formulario recargue la página
+
+    // Obtener datos del formulario
+    let personas = document.getElementById("personas").value;
+    let fecha = document.getElementById("fecha").value;
+    let hora = document.getElementById("hora").value;
+    let restaurante = "Restaurante Elegido"; // Puedes cambiarlo dinámicamente
+
+    // Crear objeto de reserva
+    let reserva = { restaurante, personas, fecha, hora };
+
+    // Guardar en localStorage
+    let reservas = JSON.parse(localStorage.getItem("reservas")) || [];
+    reservas.push(reserva);
+    localStorage.setItem("reservas", JSON.stringify(reservas));
+
+    // Mensaje en la consola
+    console.log("Se ha hecho la reserva correctamente");
+
+    // Opcional: mostrar alerta visual (puedes quitarlo si solo quieres la consola)
+    alert("Reserva realizada con éxito. Puedes verla en tu Área de Socios.");
+}
+</script>
+
+
+<footer>
+    <div class="footer-content">
+        <p>© 2025 Metropolitan. Todos los derechos reservados.</p>
+        <ul>
+            <li><a href="aviso-legal.html">Aviso Legal</a></li>
+            <li><a href="politica-privacidad.html">Política de Privacidad</a></li>
+            <li><a href="cookies.html">Política de Cookies</a></li>
+        </ul>
+    </div>
+</footer>
+
+</body>
+</html>

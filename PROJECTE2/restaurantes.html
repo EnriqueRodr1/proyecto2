@@ -15,14 +15,12 @@
     </div>
     <nav class="nav-links">
         <a href="restaurantes.html">Restaurantes</a>
-        <a href="#">Spa</a>
-        <a href="#">Hoteles</a>
-        <a href="#">Pistas</a>
+        <a href="spa.html">Spa</a>
+        <a href="hoteles.html">Hoteles</a>
+        <a href="pistas.html">Pistas</a>
     </nav>
     <div class="icons">
-        <a href="#">Área Socio</a>
-        <a href="#"><i class="fas fa-user"></i></a>
-        <button class="menu-btn"><i class="fas fa-bars"></i></button>
+        <a href="socio.html">Área Socio</a>
     </div>
 </header>
 
@@ -37,6 +35,12 @@
                 <p>Lunes a Viernes de 8:30 a 20:30 h</p>
                 <p>Sábados de 9:30 a 13:30 h</p>
                 <p>Domingos y festivos cerrados</p>
+                <button onclick="guardarFavorito('Metropolitan Abascal', 'restaurantes.html')" class="guardar-btn">
+                    <i class="fas fa-heart"></i> Guardar
+                </button>               
+                <a href="reservas.html">
+                    <button class="reserva-btn">Hacer una Reserva</button>
+                </a>                
                 <a href="carta.html" class="btn">Carta Desayuno →</a>
                 <a href="menus-diarios.html" class="btn">Menús Diarios →</a>
                 <a href="mapa.html" class="btn">Ver mapa →</a>                
@@ -50,9 +54,11 @@
                 <p>C/ Escoles Pies, 105 – 08017 Barcelona</p>
                 <p>Contacto: 93 254 00 55</p>
                 <p>restaurante.iradier@clubmetropolitan.com</p>
-                <button class="reserve-btn">Hacer una reserva</button>
                 <p>De lunes a viernes de 7:00 h a 21:30 h.</p>
                 <p>Sábados, domingos y festivos de 9:00 a 20:00 h.</p>
+                <a href="reservas.html">
+                    <button class="reserva-btn">Hacer una Reserva</button>
+                </a>
                 <a href="carta.html" class="btn">Carta Desayuno →</a>
                 <a href="menus-diarios.html" class="btn">Menús Diarios →</a>
                 <a href="mapa.html" class="btn">Ver mapa →</a>
@@ -68,12 +74,22 @@
                 <p>De lunes a viernes de 8:30 a 13:30 h</p>
                 <p>Sábados de 9:00 a 13:00 h</p>
                 <p>Domingos y festivos cerrados</p>
+                <a href="reservas.html">
+                    <button class="reserva-btn">Hacer una Reserva</button>
+                </a>  
                 <a href="carta.html" class="btn">Carta Desayuno →</a>
                 <a href="menus-diarios.html" class="btn">Menús Diarios →</a>
                 <a href="mapa.html" class="btn">Ver mapa →</a>                
             </div>
         </div>
     </section>
+    <script>
+        function guardarFavorito(nombre, url) {
+    let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
+    favoritos.push({ nombre, url });
+    localStorage.setItem("favoritos", JSON.stringify(favoritos));
+}
+    </script>
 
     <!-- FOOTER -->
     <footer>
