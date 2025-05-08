@@ -18,6 +18,9 @@
         <a href="hoteles.html">Hoteles</a>
         <a href="pistas.html">Pistas</a>
     </nav>
+    <div class="icons">
+        <a href="socio.html">Área Socio</a>
+    </div>
 </header>
 
 <!-- SECCIÓN DE RESERVA -->
@@ -68,6 +71,29 @@
     if (tipoPista) {
         document.getElementById('tipo-pista').value = tipoPista.charAt(0).toUpperCase() + tipoPista.slice(1);
     }
+
+    // Simulación: Horas disponibles y ocupadas (esto luego vendrá de una API o consulta)
+    const horasDisponibles = ["08:00", "09:00", "11:00", "12:00", "15:00", "16:00"];
+    const todasLasHoras = [
+        "08:00", "09:00", "10:00", "11:00", "12:00",
+        "13:00", "14:00", "15:00", "16:00", "17:00"
+    ];
+
+    const selectHora = document.getElementById("hora");
+
+    todasLasHoras.forEach(hora => {
+        const option = document.createElement("option");
+        option.value = hora;
+        option.textContent = `${hora}`;
+
+        if (!horasDisponibles.includes(hora)) {
+            option.disabled = true;
+            option.style.backgroundColor = "red";
+            option.textContent += " (Reservado)";
+        }
+
+        selectHora.appendChild(option);
+    });
 </script>
 
 </body>

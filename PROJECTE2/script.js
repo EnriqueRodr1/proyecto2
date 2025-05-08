@@ -86,3 +86,39 @@ document.querySelectorAll(".reserve-btn").forEach(btn => {
         alert("Reserva realizada con éxito!");
     });
 });
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', async () => {
+    const tipoPista = new URLSearchParams(window.location.search).get('tipo');
+    const pistaId = 1; // deberías obtenerlo dinámicamente según la pista seleccionada
+    const fechaInput = document.getElementById('fecha');
+    const horaSelect = document.getElementById('hora');
+
+    async function actualizarHoras() {
+        const fecha = fechaInput.value;
+        if (!fecha) return;
+
+        const res = await fetch(`http://localhost:8000/api/horas-disponibles/pistas?fecha=${fecha}&pista_id=${pistaId}`);
+        const data = await res.json();
+
+        horaSelect.innerHTML = '';
+        const todas = [...data.disponibles, ...data.ocupadas].sort();
+
+        todas.forEach(hora => {
+            const option = document.createElement('option');
+            option.value = hora;
+            option.textContent = hora;
+            if (data.ocupadas.includes(hora)) {
+                option.style.color = 'red';
+                option.disabled = true;
+            }
+            horaSelect.appendChild(option);
+        });
+    }
+
+    fechaInput.addEventListener('change', actualizarHoras);
+});

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reservas</title>
+    <title>Reservas Restaurante</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -23,10 +23,9 @@
     </div>
 </header>
 
-<!-- SECCIÓN DE RESERVAS -->
 <section class="reserva-section">
-    <h2>Haz tu Reserva</h2>
-    <form class="reserva-form" onsubmit="guardarReserva(event)">
+    <h2>Reserva en el Restaurante</h2>
+    <form class="reserva-form" onsubmit="guardarReservaRestaurante(event)">
         <label for="personas">Número de personas:</label>
         <select id="personas" name="personas">
             <option value="1">1 Persona</option>
@@ -47,36 +46,9 @@
     </form>
 </section>
 
-<script>
-function guardarReserva(event) {
-    event.preventDefault(); // Evita que el formulario recargue la página
-
-    // Obtener datos del formulario
-    let personas = document.getElementById("personas").value;
-    let fecha = document.getElementById("fecha").value;
-    let hora = document.getElementById("hora").value;
-    let restaurante = "Restaurante Elegido"; // Puedes cambiarlo dinámicamente
-
-    // Crear objeto de reserva
-    let reserva = { restaurante, personas, fecha, hora };
-
-    // Guardar en localStorage
-    let reservas = JSON.parse(localStorage.getItem("reservas")) || [];
-    reservas.push(reserva);
-    localStorage.setItem("reservas", JSON.stringify(reservas));
-
-    // Mensaje en la consola
-    console.log("Se ha hecho la reserva correctamente");
-
-    // Opcional: mostrar alerta visual (puedes quitarlo si solo quieres la consola)
-    alert("Reserva realizada con éxito. Puedes verla en tu Área de Socios.");
-}
-</script>
-
-
 <footer>
     <div class="footer-content">
-        <p>© 2025 Metropolitan. Todos los derechos reservados.</p>
+        <p>© 2025 Odisea. Todos los derechos reservados.</p>
         <ul>
             <li><a href="aviso-legal.html">Aviso Legal</a></li>
             <li><a href="politica-privacidad.html">Política de Privacidad</a></li>
@@ -84,6 +56,52 @@ function guardarReserva(event) {
         </ul>
     </div>
 </footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const email = urlParams.get("email");
+
+        if (!email) {
+            alert("No se ha proporcionado un email.");
+            window.location.href = "index.html";
+            return;
+        }
+
+        function guardarReservaRestaurante(event) {
+            event.preventDefault();
+
+            const personas = document.getElementById("personas").value;
+            const fecha = document.getElementById("fecha").value;
+            const hora = document.getElementById("hora").value;
+            const restaurante = "Restaurante Elegido";
+
+            if (!fecha || !hora || !personas) {
+                alert("Por favor, completa todos los campos.");
+                return;
+            }
+
+            fetch("http://10.210.82.24:8001/reservas_restaurante/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, restaurante, personas, fecha, hora })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Reserva realizada con éxito.");
+                } else {
+                    console.error("Error al realizar la reserva:", data);
+                    alert("Error al realizar la reserva.");
+                }
+            })
+            .catch(error => {
+                console.error("Error al conectar con la API:", error);
+                alert("Error al realizar la reserva.");
+            });
+        }
+    });
+</script>
 
 </body>
 </html>

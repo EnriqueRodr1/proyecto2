@@ -25,7 +25,7 @@
     <h1>Reserva tu Estancia</h1>
     <p>Completa el formulario para reservar tu habitación en el Hotel.</p>
 
-    <form action="confirmacion.html" method="POST">
+    <form onsubmit="guardarReservaHotel(event)">
         <label for="nombre">Nombre Completo:</label>
         <input type="text" id="nombre" name="nombre" required>
 
@@ -63,11 +63,30 @@
 </footer>
 
 <script>
-    // Obtener el tipo de habitación de la URL y mostrarlo en el input
+    // Obtener tipo de habitación desde la URL
     const urlParams = new URLSearchParams(window.location.search);
     const tipoHabitacion = urlParams.get('tipo');
     if (tipoHabitacion) {
         document.getElementById('tipo-habitacion').value = tipoHabitacion.charAt(0).toUpperCase() + tipoHabitacion.slice(1);
+    }
+
+    // Guardar reserva de hotel en localStorage
+    function guardarReservaHotel(event) {
+        event.preventDefault();
+
+        const habitacion = document.getElementById("tipo-habitacion").value;
+        const fecha = document.getElementById("fecha").value;
+        const hora = document.getElementById("hora").value;
+        const personas = document.getElementById("personas").value;
+
+        const reserva = { habitacion, fecha, hora, personas };
+
+        let reservasHotel = JSON.parse(localStorage.getItem("reservas-hotel")) || [];
+        reservasHotel.push(reserva);
+        localStorage.setItem("reservas-hotel", JSON.stringify(reservasHotel));
+
+        alert("Reserva de hotel realizada con éxito. Puedes verla en tu Área de Socios.");
+        window.location.href = "socio.html";
     }
 </script>
 

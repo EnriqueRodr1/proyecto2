@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Área de Socios - Odisea</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
 </head>
 <body>
 
@@ -22,149 +21,93 @@
     </nav>
 </header>
 
-<!-- CONTENEDOR PRINCIPAL -->
 <div class="socio-container">
-    
-    <!-- SIDEBAR (PERFIL DEL USUARIO) -->
     <aside class="socio-sidebar">
         <img src="foto.jpg" alt="Foto de Perfil" class="perfil-img">
-        <h2 id="nombre-socio">Usuario Ejemplo</h2>
-        <p><strong>ID Socio:</strong> <span id="id-socio">#123456</span></p>
-        <p><strong>Email:</strong> <span id="email-socio">usuario@email.com</span></p>
-        <p><strong>Teléfono:</strong> <span id="telefono-socio">+34 600 123 456</span></p>
+        <h2 id="nombre-socio">Usuario</h2>
+        <p><strong>Email:</strong> <span id="email-socio">usuario@example.com</span></p>
     </aside>
 
-    <!-- CONTENIDO PRINCIPAL -->
     <main class="socio-contenido">
-        
-<!-- SECCIÓN FAVORITOS -->
-<section class="socio-favoritos">
-    <h2>Guardados</h2>
-    <ul id="lista-favoritos">
-        <p>No hay elementos guardados aún.</p>
-    </ul>
-</section>
+        <section class="socio-favoritos">
+            <h2>Favoritos</h2>
+            <ul id="lista-favoritos">
+                <p>No hay elementos guardados aún.</p>
+            </ul>
+        </section>
 
-<!-- SECCIÓN RESERVAS -->
-<section class="socio-reservas">
-    <h2>Reservas Restaurantes</h2>
-    <ul id="lista-reservas">
-        <p>No tienes reservas pendientes.</p>
-    </ul>
-</section>
-
-<!-- SECCIÓN RESERVAS SPA -->
-<section class="socio-reservas">
-    <h2>Reservas de Spa</h2>
-    <ul id="lista-reservas-spa">
-        <p>No tienes reservas de Spa pendientes.</p>
-    </ul>
-</section>
-
-<script>
-// Mostrar reservas de Spa en `socio.html`
-function actualizarReservasSpa() {
-    let lista = document.getElementById("lista-reservas-spa");
-    let reservas = JSON.parse(localStorage.getItem("reservas-spa")) || [];
-
-    lista.innerHTML = reservas.length ? "" : "<p>No tienes reservas de Spa pendientes.</p>";
-
-    reservas.forEach((item, index) => {
-        let li = document.createElement("li");
-        li.classList.add("reserva-item");
-        li.innerHTML = `
-            <strong>${item.servicio}</strong> <br>
-            <p><strong>Fecha:</strong> ${item.fecha} | <strong>Hora:</strong> ${item.hora}</p>
-            <button onclick="eliminarReservaSpa(${index})" class="cancelar-btn">Anular Reserva</button>
-        `;
-        lista.appendChild(li);
-    });
-}
-
-// Eliminar reserva de Spa
-function eliminarReservaSpa(index) {
-    let reservas = JSON.parse(localStorage.getItem("reservas-spa")) || [];
-    reservas.splice(index, 1); // Eliminar la reserva seleccionada
-    localStorage.setItem("reservas-spa", JSON.stringify(reservas));
-    actualizarReservasSpa(); // Actualizar la lista de reservas en la página
-}
-
-// Cargar reservas de Spa al iniciar
-document.addEventListener("DOMContentLoaded", actualizarReservasSpa);
-
-
-// Mostrar reservas pendientes en `socio.html`
-function actualizarReservas() {
-    let lista = document.getElementById("lista-reservas");
-    let reservas = JSON.parse(localStorage.getItem("reservas")) || [];
-
-    lista.innerHTML = reservas.length ? "" : "<p>No tienes reservas pendientes.</p>";
-
-    reservas.forEach((item, index) => {
-        let li = document.createElement("li");
-        li.classList.add("reserva-item");
-        li.innerHTML = `
-            <strong>${item.restaurante}</strong> <br>
-            <p><strong>Fecha:</strong> ${item.fecha} | <strong>Hora:</strong> ${item.hora}</p>
-            <p><strong>Personas:</strong> ${item.personas}</p>
-            <button onclick="eliminarReserva(${index})" class="cancelar-btn">Anular Reserva</button>
-        `;
-        lista.appendChild(li);
-    });
-}
-
-// Eliminar reserva
-function eliminarReserva(index) {
-    let reservas = JSON.parse(localStorage.getItem("reservas")) || [];
-    reservas.splice(index, 1); // Eliminar la reserva seleccionada
-    localStorage.setItem("reservas", JSON.stringify(reservas));
-    actualizarReservas(); // Actualizar la lista de reservas en la página
-}
-
-// Cargar reservas al iniciar
-document.addEventListener("DOMContentLoaded", actualizarReservas);
-
-
-// Mostrar favoritos en `socio.html`
-function actualizarFavoritos() {
-    let lista = document.getElementById("lista-favoritos");
-    let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
-
-    lista.innerHTML = favoritos.length ? "" : "<p>No hay elementos guardados aún.</p>";
-
-    favoritos.forEach((item, index) => {
-        let li = document.createElement("li");
-        li.classList.add("favorito-item");
-        li.innerHTML = `
-            <a href="${item.url}">${item.nombre}</a>
-            <button onclick="eliminarFavorito(${index})" class="eliminar-btn">Eliminar</button>
-        `;
-        lista.appendChild(li);
-    });
-}
-
-// Eliminar favorito
-function eliminarFavorito(index) {
-    let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
-    favoritos.splice(index, 1); // Eliminar el favorito seleccionado
-    localStorage.setItem("favoritos", JSON.stringify(favoritos));
-    actualizarFavoritos(); // Actualizar la lista de favoritos en la página
-}
-
-// Cargar favoritos al iniciar
-document.addEventListener("DOMContentLoaded", actualizarFavoritos);
-</script>
-
-
+        <section class="socio-reservas">
+            <h2>Reservas</h2>
+            <ul id="lista-reservas">
+                <p>No tienes reservas pendientes.</p>
+            </ul>
+        </section>
     </main>
-
 </div>
 
 <footer>
-    <div class="footer-content">
-        <p>© 2025 Odisea. Todos los derechos reservados.</p>
-    </div>
+    <p>© 2025 Odisea. Todos los derechos reservados.</p>
 </footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const email = urlParams.get("email");
+        if (!email) {
+            alert("No se ha proporcionado un email.");
+            window.location.href = "index.html";
+            return;
+        }
+
+        // Cargar Favoritos
+        fetch(`http://10.210.82.24:8001/favoritos/${email}`)
+            .then(response => response.json())
+            .then(data => {
+                const lista = document.getElementById("lista-favoritos");
+                lista.innerHTML = data.length ? "" : "<p>No hay elementos guardados aún.</p>";
+                data.forEach(item => {
+                    let li = document.createElement("li");
+                    li.innerHTML = `${item.tipo}: ${item.nombre} <button onclick="eliminarFavorito('${item.id}')">Eliminar</button>`;
+                    lista.appendChild(li);
+                });
+            });
+
+        // Cargar Reservas
+        fetch(`http://10.210.82.24:8001/reservas/${email}`)
+            .then(response => response.json())
+            .then(data => {
+                const lista = document.getElementById("lista-reservas");
+                lista.innerHTML = data.length ? "" : "<p>No tienes reservas pendientes.</p>";
+                data.forEach(item => {
+                    let li = document.createElement("li");
+                    li.innerHTML = `Reserva en ${item.tipo}: ${item.nombre} - ${item.fecha} ${item.hora} <button onclick="eliminarReserva('${item.id}')">Eliminar</button>`;
+                    lista.appendChild(li);
+                });
+            });
+    });
+
+    function eliminarFavorito(id) {
+        fetch(`http://10.210.82.24:8001/favoritos/${id}`, {
+            method: "DELETE"
+        })
+        .then(() => {
+            alert("Favorito eliminado");
+            location.reload();
+        })
+        .catch(error => console.error("Error al eliminar favorito:", error));
+    }
+
+    function eliminarReserva(id) {
+        fetch(`http://10.210.82.24:8001/reservas/${id}`, {
+            method: "DELETE"
+        })
+        .then(() => {
+            alert("Reserva eliminada");
+            location.reload();
+        })
+        .catch(error => console.error("Error al eliminar reserva:", error));
+    }
+</script>
 
 </body>
 </html>

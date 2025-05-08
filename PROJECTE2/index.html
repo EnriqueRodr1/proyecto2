@@ -13,7 +13,7 @@
     <!-- HEADER -->
     <header>
         <div class="logo">
-            <a href="#"><img src="logo.svg" alt="Logo"></a>
+            <a href="index.html"><img src="logo.svg" alt="Logo"></a>
         </div>
         <nav class="nav-links">
             <a href="restaurantes.html">Restaurantes</a>
@@ -22,97 +22,48 @@
             <a href="pistas.html">Pistas</a>
         </nav>
         <div class="icons">
-            <a href="socio.html"><i class="fas fa-user"></i></a>
+            <a href="registro.html" class="hazte-socio-btn">Hazte Socio</a>
         </div>
     </header>
 
-    <nav class="mobile-menu">
-        <a href="#">Restaurantes</a>
-        <a href="#">Spa</a>
-        <a href="#">Hoteles</a>
-        <a href="#">Pistas</a>
-    </nav>
-
-    <!-- SLIDER PRINCIPAL -->
-    <section class="slider">
-        <div class="slider-container">
-            <div class="slide active" style="background-image: url('slider1.jpg');"></div>
-            <div class="slide" style="background-image: url('slider2.jpg');"></div>
-            <div class="slide" style="background-image: url('slider3.jpg');"></div>
-        </div>
-        <button class="prev">&#10094;</button>
-        <button class="next">&#10095;</button>
+    <!-- FORMULARIO DE INICIO DE SESIÓN -->
+    <section class="login-section">
+        <h2>Iniciar Sesión</h2>
+        <form id="loginForm" method="POST" action="#">
+            <input type="email" id="email" name="email" placeholder="Correo electrónico" required />
+            <input type="password" id="password" name="password" placeholder="Contraseña" required />
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+        <p id="loginMessage"></p>
     </section>
 
-    <!-- SLIDER DE SERVICIOS -->
-    <section class="service-slider">
-        <div class="service-slide active">
-            <div class="service-content">
-                <h2>RESTAURANTES</h2>
-                <p>Disfruta de una experiencia gastronómica única con chefs de alta categoría.</p>
-                <a href="restaurantes.html" class="service-btn">+ Ver Más</a>
-            </div>
-            <div class="service-image" style="background-image: url('restaurante.jpg');"></div>
-        </div>
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", async function(e) {
+            e.preventDefault();
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
 
-        <div class="service-slide">
-            <div class="service-content">
-                <h2>SPA</h2>
-                <p>Relájate y renueva tu cuerpo y mente en nuestro lujoso SPA.</p>
-                <a href="spa.html" class="service-btn">+ Ver Más</a>
-            </div>
-            <div class="service-image" style="background-image: url('spa.jpg');"></div>
-        </div>
+            try {
+                const response = await fetch("http://10.210.82.24:8001/buscar_socio/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ email, contrasenya: password })
+                });
 
-        <div class="service-slide">
-            <div class="service-content">
-                <h2>HOTELES</h2>
-                <p>Hospédate en nuestras lujosas habitaciones con las mejores comodidades.</p>
-                <a href="hoteles.html" class="service-btn">+ Ver Más</a>
-            </div>
-            <div class="service-image" style="background-image: url('hotel.jpg');"></div>
-        </div>
-
-        <div class="service-slide">
-            <div class="service-content">
-                <h2>PISTAS DEPORTIVAS</h2>
-                <p>Disfruta de nuestras canchas de fútbol, pádel y baloncesto.</p>
-                <a href="pistas.html" class="service-btn">+ Ver Más</a>
-            </div>
-            <div class="service-image" style="background-image: url('pista.jpg');"></div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-container">
-            <div class="social-icons">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
-            </div>
-            
-            <div class="footer-links">
-                <a href="#">Política de Privacidad</a>
-                <a href="#">Términos y Condiciones</a>
-                <a href="#">Aviso Legal</a>
-                <a href="#">Contacto</a>
-            </div>
-
-            <div class="contact-form">
-                <h3>Contacto</h3>
-                <form>
-                    <input type="text" placeholder="Tu nombre" required>
-                    <input type="email" placeholder="Tu correo" required>
-                    <textarea placeholder="Tu mensaje"></textarea>
-                    <button type="submit">Enviar</button>
-                </form>
-            </div>
-        </div>
-
-        <p class="footer-copy">&copy; 2025 Club Exclusivo. Todos los derechos reservados.</p>
-    </footer>
+                const data = await response.json();
+                if (response.status === 200) {
+                    window.location.href = "socio.html?email=" + encodeURIComponent(email);
+                } else {
+                    document.getElementById("loginMessage").textContent = data.detail || "Error al iniciar sesión.";
+                }
+            } catch (error) {
+                console.error("Error en la conexión a la API:", error);
+                document.getElementById("loginMessage").textContent = "Error de conexión con el servidor.";
+            }
+        });
+    </script>
 
 </body>
 </html>

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hoteles - Odisea</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
 </head>
 <body>
 
@@ -17,53 +18,81 @@
         <a href="spa.html">Spa</a>
         <a href="hoteles.html">Hoteles</a>
         <a href="pistas.html">Pistas</a>
+        <a href="socio.html">Área Socio</a>
     </nav>
 </header>
 
-<!-- SECCIÓN PRINCIPAL DE HOTELES -->
 <section class="hoteles-banner">
-    <h1>Descubre nuestros hoteles de lujo</h1>
-    <p>Vive una experiencia única con nuestras exclusivas habitaciones y servicios.</p>
+    <h1>Explora Nuestros Hoteles</h1>
+    <p>Reserva tu estancia en los mejores hoteles de Odisea.</p>
 </section>
 
-<!-- SECCIÓN LISTA DE HOTELES -->
-<section class="hoteles-lista">
-    <h2>Elige tu hotel ideal</h2>
-    
-    <div class="hoteles-grid">
-        <div class="hotel-item">
-            <img src="hotel1.jpg" alt="Hotel Playa">
-            <h3>Hotel Playa</h3>
-            <p>Un hotel frente al mar con vistas espectaculares y habitaciones de lujo.</p>
-            <a href="habitaciones.html" class="ver-mas">Ver más</a>
-        </div>
-
-        <div class="hotel-item">
-            <img src="hotel2.jpg" alt="Hotel Montaña">
-            <h3>Hotel Montaña</h3>
-            <p>Escápate a la naturaleza con nuestras cómodas habitaciones y spa.</p>
-            <a href="habitaciones.html" class="ver-mas">Ver más</a>
-        </div>
-
-        <div class="hotel-item">
-            <img src="hotel3.jpg" alt="Hotel Urbano">
-            <h3>Hotel Urbano</h3>
-            <p>Ubicado en el corazón de la ciudad, con todas las comodidades a tu alcance.</p>
-            <a href="habitaciones.html" class="ver-mas">Ver más</a>
-        </div>
+<section class="hoteles-grid">
+    <div class="hotel-item" data-hotel-id="1">
+        <img src="hotel1.jpg" alt="Hotel 1">
+        <h3>Hotel Central</h3>
+        <p>Un lugar céntrico con todas las comodidades.</p>
+        <button class="guardar-btn">❤️ Guardar Favorito</button>
+        <button class="reserva-btn">Reservar</button>
+    </div>
+    <div class="hotel-item" data-hotel-id="2">
+        <img src="hotel2.jpg" alt="Hotel 2">
+        <h3>Hotel Playa</h3>
+        <p>Relájate frente al mar con vistas impresionantes.</p>
+        <button class="guardar-btn">❤️ Guardar Favorito</button>
+        <button class="reserva-btn">Reservar</button>
     </div>
 </section>
 
-<footer>
-    <div class="footer-content">
-        <p>© 2025 Metropolitan. Todos los derechos reservados.</p>
-        <ul>
-            <li><a href="aviso-legal.html">Aviso Legal</a></li>
-            <li><a href="politica-privacidad.html">Política de Privacidad</a></li>
-            <li><a href="cookies.html">Política de Cookies</a></li>
-        </ul>
-    </div>
-</footer>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const email = urlParams.get("email");
+
+        if (!email) {
+            alert("No se ha proporcionado un email.");
+            window.location.href = "index.html";
+            return;
+        }
+
+        document.querySelectorAll(".guardar-btn").forEach(btn => {
+            btn.addEventListener("click", async function () {
+                const hotelId = this.closest(".hotel-item").dataset.hotelId;
+                try {
+                    await fetch("http://10.210.82.24:8001/favoritos/", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ email, tipo: "hotel", nombre: hotelId })
+                    });
+                    alert("Favorito guardado");
+                } catch (error) {
+                    console.error("Error al guardar favorito:", error);
+                }
+            });
+        });
+
+        document.querySelectorAll(".reserva-btn").forEach(btn => {
+            btn.addEventListener("click", async function () {
+                const hotelId = this.closest(".hotel-item").dataset.hotelId;
+                const fecha = prompt("Ingrese la fecha de la reserva (YYYY-MM-DD):");
+                const noches = prompt("Ingrese el número de noches:");
+
+                if (fecha && noches) {
+                    try {
+                        await fetch("http://10.210.82.24:8001/reservas_hotel/", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ email, hotel_id: hotelId, fecha, noches })
+                        });
+                        alert("Reserva realizada con éxito");
+                    } catch (error) {
+                        console.error("Error al realizar la reserva:", error);
+                    }
+                }
+            });
+        });
+    });
+</script>
 
 </body>
 </html>
