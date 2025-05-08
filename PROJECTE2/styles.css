@@ -215,7 +215,7 @@ footer {
 
 /* Redes sociales */
 .social-icons a {
-    color: white;
+    color: black;
     font-size: 24px;
     margin: 0 10px;
     transition: color 0.3s;
@@ -711,7 +711,7 @@ header {
 }
 
 .icons a {
-    color: white;
+    color: black;
     text-decoration: none;
     margin-left: 15px;
 }
@@ -1707,7 +1707,7 @@ button:hover {
 .hazte-socio-btn {
     margin-left: 10px;
     padding: 8px 14px;
-    background-color: black;
+    background-color: white;
     color: black;
     border: 2px solid white;
     border-radius: 20px;
