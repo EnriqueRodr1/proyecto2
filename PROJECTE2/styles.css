@@ -26,7 +26,7 @@ header {
 
 header .nav-links a {
     margin: 0 0.7rem;
-    color: white;
+    color: black;
     text-decoration: none;
     padding: 0.5rem 1rem;
     border: 2px solid transparent;
@@ -37,7 +37,7 @@ header .nav-links a {
 
 header .nav-links a:hover {
     border-color: #000;
-    background-color: #f0f0f0;
+    background-color: black;
 }
 
 
@@ -967,13 +967,13 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 15px 30px;
-    background-color: #222;
-    color: white;
+    background-color: white;
+    color: black;
 }
 
 .nav-links a {
     margin: 0 15px;
-    color: white;
+    color: black;
     text-decoration: none;
 }
 

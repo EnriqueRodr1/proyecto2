@@ -60,7 +60,7 @@
         }
 
         // Cargar Favoritos
-        fetch(`http://10.210.82.24:8001/favoritos/${email}`)
+        fetch(`http://18.210.82.24:8001/favoritos/${email}`)
             .then(response => response.json())
             .then(data => {
                 const lista = document.getElementById("lista-favoritos");
@@ -73,7 +73,7 @@
             });
 
         // Cargar Reservas
-        fetch(`http://10.210.82.24:8001/reservas/${email}`)
+        fetch(`http://18.210.82.24:8001/reservas/${email}`)
             .then(response => response.json())
             .then(data => {
                 const lista = document.getElementById("lista-reservas");
@@ -87,7 +87,7 @@
     });
 
     function eliminarFavorito(id) {
-        fetch(`http://10.210.82.24:8001/favoritos/${id}`, {
+        fetch(`http://18.210.82.24:8001/favoritos/${id}`, {
             method: "DELETE"
         })
         .then(() => {
@@ -98,7 +98,7 @@
     }
 
     function eliminarReserva(id) {
-        fetch(`http://10.210.82.24:8001/reservas/${id}`, {
+        fetch(`http://18.210.82.24:8001/reservas/${id}`, {
             method: "DELETE"
         })
         .then(() => {

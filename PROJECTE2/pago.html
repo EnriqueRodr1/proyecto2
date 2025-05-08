@@ -89,7 +89,7 @@
         return;
       }
 
-      fetch("http://10.210.82.24:8001/pago/", {
+      fetch("http://18.210.82.24:8001/pago/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, metodo, titular, monto })
