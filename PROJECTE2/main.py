@@ -1,8 +1,9 @@
 from fastapi import FastAPI, Depends, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from typing import List
 import models
-from database import SessionLocal, engine
+from db import SessionLocal, engine
 from schemas import (
     SocioCreate, SocioResponse,
     HotelCreate, HotelResponse,
@@ -21,6 +22,15 @@ from schemas import (
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+# Configuración de CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["GET", "POST"],
+    allow_headers=["*"]
+)
 
 # Dependencia para obtener la sesión de base de datos
 def get_db():

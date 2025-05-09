@@ -73,7 +73,7 @@
                 const hotelId = this.closest(".habitacion").dataset.hotelId;
                 const tipo = this.closest(".habitacion").dataset.tipo;
                 try {
-                    await fetch("http://10.210.82.24:8001/favoritos/", {
+                    await fetch("http://18.210.82.24:8001/favoritos/", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({ email, tipo: "habitacion", nombre: tipo })
@@ -94,7 +94,7 @@
 
                 if (fecha && noches) {
                     try {
-                        await fetch("http://10.210.82.24:8001/reservas_hotel/", {
+                        await fetch("http://18.210.82.24:8001/reservas_hotel/", {
                             method: "POST",
                             headers: { "Content-Type": "application/json" },
                             body: JSON.stringify({ email, hotel_id: hotelId, tipo_habitacion: tipo, fecha, noches })

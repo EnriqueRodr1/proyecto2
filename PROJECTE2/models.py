@@ -20,12 +20,7 @@ class Socio(Base):
     reservas_spa = relationship("ReservaSpa", back_populates="socio")
     favoritos = relationship("Favorito", back_populates="socio")
 
-# Hoteles
-class Hotel(Base):
-    __tablename__ = 'hoteles'
-
-    id = Column(Integer, primary_key=True, index=True)
-    nombre = Column(String(100), nullable=True)
+# Hotg(100), nullable=True)
     ubicacion = Column(Text, nullable=True)
     disponibilidad = Column(Boolean, default=True)
     valoracion = Column(Float, nullable=True)

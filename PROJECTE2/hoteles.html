@@ -59,7 +59,7 @@
             btn.addEventListener("click", async function () {
                 const hotelId = this.closest(".hotel-item").dataset.hotelId;
                 try {
-                    await fetch("http://10.210.82.24:8001/favoritos/", {
+                    await fetch("http://18.210.82.24:8001/favoritos/", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({ email, tipo: "hotel", nombre: hotelId })
@@ -79,7 +79,7 @@
 
                 if (fecha && noches) {
                     try {
-                        await fetch("http://10.210.82.24:8001/reservas_hotel/", {
+                        await fetch("http://18.210.82.24:8001/reservas_hotel/", {
                             method: "POST",
                             headers: { "Content-Type": "application/json" },
                             body: JSON.stringify({ email, hotel_id: hotelId, fecha, noches })
