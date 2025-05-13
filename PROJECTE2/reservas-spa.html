@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservar Spa</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <a href="index.html"><img src="logo.svg" alt="Logo"></a>
+    </div>
+    <nav class="nav-links">
+        <a href="restaurantes.html">Restaurantes</a>
+        <a href="spa.html">Spa</a>
+        <a href="hoteles.html">Hoteles</a>
+        <a href="pistas.html">Pistas</a>
+    </nav>
+    <div class="icons">
+        <a href="socio.html">Área Socio</a>
+    </div>
+</header>
+
+<section class="reserva-section">
+    <h2>Reserva tu Servicio de Spa</h2>
+    <form class="reserva-form" onsubmit="guardarReservaSpa(event)">
+        <label for="servicio">Selecciona un servicio:</label>
+        <select id="servicio" name="servicio" required>
+            <option value="Jacuzzi">Jacuzzi</option>
+            <option value="Masajes">Salón de Masajes</option>
+            <option value="Fitness">Sala Fitness</option>
+        </select>
+
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" name="fecha" required>
+
+        <label for="hora">Hora:</label>
+        <input type="time" id="hora" name="hora" required>
+
+        <button type="submit" class="reserva-btn">Confirmar Reserva</button>
+    </form>
+</section>
+
+<footer>
+    <div class="footer-content">
+        <p>© 2025 Odisea. Todos los derechos reservados.</p>
+        <ul>
+            <li><a href="aviso-legal.html">Aviso Legal</a></li>
+            <li><a href="politica-privacidad.html">Política de Privacidad</a></li>
+            <li><a href="cookies.html">Política de Cookies</a></li>
+        </ul>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const email = urlParams.get("email");
+
+        if (!email) {
+            alert("No se ha proporcionado un email.");
+            window.location.href = "index.html";
+            return;
+        }
+
+        function guardarReservaSpa(event) {
+            event.preventDefault();
+
+            const servicio = document.getElementById("servicio").value;
+            const fecha = document.getElementById("fecha").value;
+            const hora = document.getElementById("hora").value;
+
+            if (!fecha || !hora || !servicio) {
+                alert("Por favor, completa todos los campos.");
+                return;
+            }
+
+            fetch("http://10.210.82.24:8001/reservas_spa/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, servicio, fecha, hora })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Reserva realizada con éxito.");
+                } else {
+                    console.error("Error al realizar la reserva:", data);
+                    alert("Error al realizar la reserva.");
+                }
+            })
+            .catch(error => {
+                console.error("Error al conectar con la API:", error);
+                alert("Error al realizar la reserva.");
+            });
+        }
+    });
+</script>
+
+</body>
+</html>

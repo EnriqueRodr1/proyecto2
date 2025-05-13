@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club Odisea</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo">
+            <a href="index.html"><img src="logo.svg" alt="Logo"></a>
+        </div>
+        <nav class="nav-links">
+            <a href="restaurantes.html">Restaurantes</a>
+            <a href="spa.html">Spa</a>
+            <a href="hoteles.html">Hoteles</a>
+            <a href="pistas.html">Pistas</a>
+        </nav>      
+        <div class="icons">
+            <a href="login.html">Unete</a>
+            <a href="socio.html">Área Socio</a>
+            <a href="registro.html" class="hazte-socio-btn">Hazte Socio</a>
+        </div>
+        
+    </header>
+
+
+    <!-- SLIDER PRINCIPAL -->
+    <section class="slider">
+        <div class="slider-container">
+            <div class="slide active" style="background-image: url('slider1.jpg');"></div>
+            <div class="slide" style="background-image: url('slider2.jpg');"></div>
+            <div class="slide" style="background-image: url('slider3.jpg');"></div>
+        </div>
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+    </section>
+
+    <!-- SLIDER DE SERVICIOS -->
+    <section class="service-slider">
+        <div class="service-slide active">
+            <div class="service-content">
+                <h2>RESTAURANTES</h2>
+                <p>Disfruta de una experiencia gastronómica única con chefs de alta categoría.</p>
+                <a href="restaurantes.html" class="service-btn">+ Ver Más</a>
+            </div>
+            <div class="service-image" style="background-image: url('restaurante.jpg');"></div>
+        </div>
+
+        <div class="service-slide">
+            <div class="service-content">
+                <h2>SPA</h2>
+                <p>Relájate y renueva tu cuerpo y mente en nuestro lujoso SPA.</p>
+                <a href="spa.html" class="service-btn">+ Ver Más</a>
+            </div>
+            <div class="service-image" style="background-image: url('spa.jpg');"></div>
+        </div>
+
+        <div class="service-slide">
+            <div class="service-content">
+                <h2>HOTELES</h2>
+                <p>Hospédate en nuestras lujosas habitaciones con las mejores comodidades.</p>
+                <a href="hoteles.html" class="service-btn">+ Ver Más</a>
+            </div>
+            <div class="service-image" style="background-image: url('hotel.jpg');"></div>
+        </div>
+
+        <div class="service-slide">
+            <div class="service-content">
+                <h2>PISTAS DEPORTIVAS</h2>
+                <p>Disfruta de nuestras canchas de fútbol, pádel y baloncesto.</p>
+                <a href="pistas.html" class="service-btn">+ Ver Más</a>
+            </div>
+            <div class="service-image" style="background-image: url('pista.jpg');"></div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-container">
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            
+            <div class="footer-links">
+                <a href="#">Política de Privacidad</a>
+                <a href="#">Términos y Condiciones</a>
+                <a href="#">Aviso Legal</a>
+                <a href="#">Contacto</a>
+            </div>
+
+            <div class="contact-form">
+                <h3>Contacto</h3>
+                <form>
+                    <input type="text" placeholder="Tu nombre" required>
+                    <input type="email" placeholder="Tu correo" required>
+                    <textarea placeholder="Tu mensaje"></textarea>
+                    <button type="submit">Enviar</button>
+                </form>
+            </div>
+        </div>
+
+        <p class="footer-copy">&copy; 2025 Club Exclusivo. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // SLIDER PRINCIPAL AUTO
+let slideIndex = 0;
+const slides = document.querySelectorAll('.slider-container .slide');
+const nextBtn = document.querySelector('.slider .next');
+const prevBtn = document.querySelector('.slider .prev');
+
+function showSlide(index) {
+    slides.forEach(slide => slide.classList.remove('active'));
+    slides[index].classList.add('active');
+}
+
+function nextSlide() {
+    slideIndex = (slideIndex + 1) % slides.length;
+    showSlide(slideIndex);
+}
+
+function prevSlide() {
+    slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+    showSlide(slideIndex);
+}
+
+nextBtn?.addEventListener('click', nextSlide);
+prevBtn?.addEventListener('click', prevSlide);
+
+setInterval(nextSlide, 5000); // cada 5 segundos
+
+// SLIDER DE SERVICIOS AUTO
+let currentService = 0;
+const serviceSlides = document.querySelectorAll('.service-slide');
+
+function showServiceSlide(index) {
+    serviceSlides.forEach(slide => slide.classList.remove('active'));
+    serviceSlides[index].classList.add('active');
+}
+
+setInterval(() => {
+    currentService = (currentService + 1) % serviceSlides.length;
+    showServiceSlide(currentService);
+}, 6000); // cada 6 segundos
+
+    </script>
+
+</body>
+</html>

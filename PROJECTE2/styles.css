@@ -1,0 +1,1722 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* HEADER */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+header .nav-links a {
+    margin: 0 0.7rem;
+    color: black;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+header .nav-links a:hover {
+    border-color: #000;
+    background-color: black;
+}
+
+
+/* Cambia el header al hacer scroll */
+header.scrolled {
+    background: black;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Logo */
+.logo img {
+    height: 50px;
+    width: auto;
+    max-width: 150px;
+}
+
+/* Menú de navegación */
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+/* Enlaces del menú */
+.nav-links a {
+    color: black;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s ease-in-out;
+    padding: 10px 15px;
+}
+
+.nav-links a:hover {
+    color: #f4a600;
+    transform: scale(1.1);
+}
+
+/* SLIDER PRINCIPAL */
+.slider {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.slider-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.slide {
+    min-width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+/* Botones del slider */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background 0.3s;
+    border-radius: 50%;
+}
+
+.prev:hover, .next:hover {
+    background: rgba(255, 165, 0, 0.8);
+}
+
+.prev { left: 20px; }
+.next { right: 20px; }
+
+/* SECCIÓN DE SERVICIOS (Nuevo Diseño) */
+.service-slider {
+    width: 100%;
+    max-width: 1200px;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.service-slide {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.service-slide:hover {
+    transform: scale(1.02);
+}
+
+/* Contenido del servicio */
+.service-content {
+    flex: 1;
+    padding: 40px;
+    text-align: left;
+}
+
+.service-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #222;
+}
+
+.service-content p {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.service-btn {
+    display: inline-block;
+    padding: 12px 20px;
+    background: #f4a600;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    transition: background 0.3s ease-in-out;
+}
+
+.service-btn:hover {
+    background: #ffcc00;
+}
+
+/* Imagen del servicio */
+.service-image {
+    flex: 1;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Alternar lados de imagen y texto */
+.service-slide:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+/* FOOTER */
+footer {
+    background: #222;
+    padding: 40px 20px;
+    color: white;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Redes sociales */
+.social-icons a {
+    color: black;
+    font-size: 24px;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+.social-icons a:hover {
+    color: #f4a600;
+}
+
+/* FORMULARIO DE CONTACTO */
+.contact-form {
+    max-width: 400px;
+    width: 100%;
+}
+
+.contact-form h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.contact-form button {
+    width: 100%;
+    padding: 12px;
+    background: #f4a600;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.contact-form button:hover {
+    background: #ffcc00;
+}
+
+/* ENLACES DEL FOOTER */
+.footer-links {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    margin: 5px 0;
+}
+
+.footer-links a:hover {
+    color: #f4a600;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    
+    .menu-btn {
+        display: block;
+    }
+    
+    .mobile-menu.show {
+        display: flex;
+    }
+
+    /* Ajustes responsive para servicios */
+    .service-slide {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .service-image {
+        width: 100%;
+        height: 250px;
+    }
+
+    .service-content {
+        padding: 20px;
+    }
+
+    .service-content h2 {
+        font-size: 2rem;
+    }
+
+    .service-content p {
+        font-size: 1rem;
+    }
+
+    .service-btn {
+        font-size: 1rem;
+    }
+
+    /* Ajustes para el footer en móvil */
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .social-icons {
+        margin-bottom: 20px;
+    }
+    
+    .contact-form {
+        margin-bottom: 20px;
+    }
+}
+
+
+/* Estilos para la sección de restaurantes */
+.restaurants {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    padding: 50px;
+    background: #e0c9a6;
+}
+
+.restaurant {
+    background: white;
+    width: 30%;
+    text-align: center;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.restaurant img {
+    width: 100%;
+    height: auto;
+}
+
+.restaurant-info {
+    padding: 20px;
+    color: #5b4221;
+}
+
+.restaurant-info h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.restaurant-info p {
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+.btn {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    color: white;
+    background: #8b6f47;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #a7895e;
+}
+
+.reserve-btn {
+    background: transparent;
+    border: 2px solid #8b6f47;
+    color: #8b6f47;
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px auto;
+    transition: 0.3s;
+}
+
+.reserve-btn:hover {
+    background: #8b6f47;
+    color: white;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .restaurants {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .restaurant {
+        width: 90%;
+    }
+}
+
+
+
+
+/* carta.html */
+.menu-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+/* Título principal */
+.menu-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #333;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+/* Línea decorativa debajo del título */
+.menu-title::after {
+    content: "";
+    width: 100px;
+    height: 4px;
+    background: #FF7F50; /* Color resaltado */
+    display: block;
+    margin: 10px auto 0;
+}
+
+/* Diseño de la cuadrícula */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* Estilo de cada categoría */
+.menu-category {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    text-align: left;
+    position: relative;
+}
+
+/* Efecto hover */
+.menu-category:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Título de cada categoría */
+.menu-category h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    color: #444;
+    position: relative;
+    padding-left: 35px;
+}
+
+/* Línea decorativa para los títulos */
+.menu-category h2::before {
+    content: "🍽"; /* Puedes cambiar el icono */
+    font-size: 1.5rem;
+    position: absolute;
+    left: 0;
+    top: 3px;
+}
+
+/* Estilo de cada plato */
+.menu-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+/* Nombre del plato */
+.menu-item h3 {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #222;
+}
+
+/* Descripción del plato */
+.menu-item p {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Precio */
+.price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #FF7F50; /* Color resaltado */
+}
+
+
+
+
+
+/* menus-diarios.html */
+/* General */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background-color: #fff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logo img {
+    height: 50px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1rem;
+    margin: 0 15px;
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-links a:hover {
+    color: #007bff;
+}
+
+.icons a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 1rem;
+}
+
+/* Sección Menús */
+.menu-section {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding: 40px 0;
+}
+
+.menu-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: #222;
+    text-transform: uppercase;
+}
+
+.menu-category {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.menu-category h3 {
+    font-size: 1.8rem;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.menu-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.menu-item:last-child {
+    border-bottom: none;
+}
+
+.menu-item h4 {
+    font-size: 1.3rem;
+    color: #333;
+    font-weight: bold;
+}
+
+.menu-item p {
+    font-size: 1rem;
+    color: #666;
+}
+
+.menu-item span {
+    display: block;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #000;
+    margin-top: 5px;
+}
+
+/* Footer */
+footer {
+    background: #222;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+.footer-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-content ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+.footer-content ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.footer-content ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .menu-section {
+        width: 95%;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .menu-category {
+        padding: 15px;
+    }
+
+    .menu-category h3 {
+        font-size: 1.5rem;
+    }
+
+    .menu-item h4 {
+        font-size: 1.2rem;
+    }
+}
+
+
+
+/* hacer reserva */
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+/* Encabezado */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 15px 30px;
+}
+
+.logo img {
+    height: 40px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 16px;
+}
+
+.icons a {
+    color: black;
+    text-decoration: none;
+    margin-left: 15px;
+}
+
+/* Sección de reservas */
+.reserva-section {
+    text-align: center;
+    padding: 50px;
+    background: white;
+    width: 50%;
+    margin: 40px auto;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.reserva-section h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.reserva-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.reserva-form label {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.reserva-form select,
+.reserva-form input {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Botón de reserva */
+.reserva-btn {
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    margin-top: 15px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.reserva-btn:hover {
+    background-color: #e65c00;
+}
+
+/* Pie de página */
+footer {
+    text-align: center;
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+    margin-top: 30px;
+}
+
+.footer-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-content ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+.footer-content a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+
+
+
+/* boton */
+.reserva-btn {
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.reserva-btn:hover {
+    background-color: #e65c00;
+}
+
+
+
+
+
+
+
+/* spa.html */
+/* ESTILOS GENERALES */
+body {
+    font-family: "Arial", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* HEADER */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #222;
+    color: white;
+}
+
+.nav-links a {
+    margin: 0 15px;
+    color: white;
+    text-decoration: none;
+}
+
+/* SECCIÓN BANNER */
+.spa-banner {
+    background: url('spa-banner.jpg') center/cover no-repeat;
+    text-align: center;
+    padding: 100px 20px;
+    color: white;
+    background-blend-mode: overlay;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.spa-banner h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.spa-banner p {
+    font-size: 18px;
+}
+
+/* SECCIÓN INFO DEL SPA */
+.spa-info {
+    text-align: center;
+    padding: 50px;
+    background-color: white;
+}
+
+.spa-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.spa-item {
+    background-color: #eee;
+    padding: 20px;
+    border-radius: 8px;
+    width: 30%;
+}
+
+.spa-item img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.spa-item h3 {
+    margin-top: 15px;
+}
+
+/* HORARIOS */
+.spa-horarios {
+    text-align: center;
+    padding: 40px;
+    background-color: #222;
+    color: white;
+}
+
+.spa-horarios h2 {
+    margin-bottom: 10px;
+}
+
+/* BOTÓN DE RESERVA */
+.reserva-btn-container {
+    margin-top: 20px;
+}
+
+.reserva-btn {
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.reserva-btn:hover {
+    background-color: #e65c00;
+}
+
+/* FOOTER */
+footer {
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+}
+
+footer ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+}
+
+
+
+/* hotel.html */
+body {
+    font-family: "Arial", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* HEADER */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: white;
+    color: black;
+}
+
+.nav-links a {
+    margin: 0 15px;
+    color: black;
+    text-decoration: none;
+}
+
+/* SECCIÓN PRINCIPAL */
+.hoteles-banner, .hotel-banner {
+    background-color: #222;
+    text-align: center;
+    padding: 100px 20px;
+    color: black;
+}
+
+/* LISTA DE HOTELES */
+.hoteles-lista {
+    text-align: center;
+    padding: 50px;
+    background-color: white;
+}
+
+.hoteles-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.hotel-item {
+    background-color: #eee;
+    padding: 20px;
+    border-radius: 8px;
+    width: 30%;
+}
+
+.hotel-item img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.ver-mas {
+    display: block;
+    background-color: #ff6600;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    text-decoration: none;
+}
+
+/* HABITACIONES */
+.habitaciones {
+    text-align: center;
+    padding: 40px;
+}
+
+.habitacion {
+    margin-bottom: 30px;
+}
+
+.reserva-btn {
+    background-color: #ff6600;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+/* SECCIÓN DEL HOTEL */
+.hotel-banner {
+    text-align: center;
+    padding: 80px 20px;
+    background: url('hotel-banner.jpg') center/cover no-repeat;
+    color: white;
+}
+
+/* HABITACIONES */
+.habitaciones {
+    text-align: center;
+    padding: 50px;
+    background-color: #fff;
+}
+
+.habitaciones-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.habitacion {
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    width: 30%;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.habitacion:hover {
+    transform: scale(1.05);
+}
+
+.habitacion img {
+    width: 100%;
+    border-radius: 8px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.reserva-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 15px;
+    background-color: #ff6600;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.reserva-btn:hover {
+    background-color: #cc5200;
+}
+
+/* FOOTER */
+.footer-content {
+    text-align: center;
+    padding: 20px;
+    background-color: #222;
+    color: white;
+}
+
+
+
+
+/* reserva habitacion hotel */
+.reserva-hotel {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.reserva-hotel h1 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.reserva-hotel p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    font-weight: bold;
+    text-align: left;
+}
+
+input, select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.reserva-btn {
+    padding: 12px;
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.reserva-btn:hover {
+    background-color: #cc5200;
+}
+
+
+
+
+
+
+
+/* PISTAS */
+.pistas-banner {
+    text-align: center;
+    padding: 80px 20px;
+    background: url('pistas-banner.jpg') center/cover no-repeat;
+    color: white;
+}
+
+/* LISTA DE PISTAS */
+.pistas-lista {
+    text-align: center;
+    padding: 50px;
+    background-color: white;
+}
+
+.pistas-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.pista-item {
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    width: 30%;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.pista-item:hover {
+    transform: scale(1.05);
+}
+
+.pista-item img {
+    width: 100%;
+    border-radius: 8px;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* FORMULARIO DE RESERVA */
+.reserva-pista {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.reserva-pista h1 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input, select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.reserva-btn {
+    padding: 12px;
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.reserva-btn:hover {
+    background-color: #cc5200;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* ESTRUCTURA PRINCIPAL */
+.socio-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 40px auto;
+    gap: 30px;
+}
+
+/* SIDEBAR - PERFIL DEL SOCIO */
+.socio-sidebar {
+    width: 30%;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.perfil-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid #ff6600;
+    margin-bottom: 10px;
+}
+
+.socio-sidebar h2 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.socio-sidebar p {
+    font-size: 16px;
+    color: #666;
+}
+
+/* CONTENIDO PRINCIPAL */
+.socio-contenido {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* SECCIONES DE FAVORITOS Y RESERVAS */
+.socio-favoritos, .socio-reservas {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.socio-favoritos h2, .socio-reservas h2 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+#lista-favoritos, #lista-reservas {
+    list-style: none;
+    padding: 0;
+}
+
+/* ESTILOS PARA ELEMENTOS GUARDADOS Y RESERVAS */
+.favorito-item, .reserva-item {
+    background: #f5f5f5;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .socio-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .socio-sidebar, .socio-contenido {
+        width: 90%;
+    }
+}
+
+
+
+
+/*  boton de guardar */
+.guardar-btn {
+    background: none;
+    border: none;
+    color: #ff6600;
+    font-size: 18px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.guardar-btn:hover {
+    transform: scale(1.1);
+    color: #cc5200;
+}
+
+
+
+
+
+/* SECCIÓN DE RESERVAS */
+.socio-reservas {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: auto;
+}
+
+.socio-reservas h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+#lista-reservas {
+    list-style: none;
+    padding: 0;
+}
+
+.reserva-item {
+    background: #f5f5f5;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.reserva-item p {
+    margin: 5px 0;
+}
+
+.cancelar-btn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.cancelar-btn:hover {
+    background: darkred;
+}
+
+
+
+
+
+
+
+
+
+/* SECCIÓN DE RESERVAS */
+.socio-reservas {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: auto;
+}
+
+.socio-reservas h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+#lista-reservas {
+    list-style: none;
+    padding: 0;
+}
+
+.reserva-item {
+    background: #f5f5f5;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.reserva-item p {
+    margin: 5px 0;
+}
+
+.cancelar-btn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.cancelar-btn:hover {
+    background: darkred;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* SECCIÓN DE RESERVAS SPA */
+.socio-reservas {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: auto;
+}
+
+.socio-reservas h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+#lista-reservas-spa {
+    list-style: none;
+    padding: 0;
+}
+
+.reserva-item {
+    background: #f5f5f5;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.reserva-item p {
+    margin: 5px 0;
+}
+
+.cancelar-btn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.cancelar-btn:hover {
+    background: darkred;
+}
+
+
+
+
+
+
+
+
+
+
+/* SECCIÓN DE FAVORITOS */
+.socio-favoritos {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: auto;
+}
+
+.socio-favoritos h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+#lista-favoritos {
+    list-style: none;
+    padding: 0;
+}
+
+.favorito-item {
+    background: #f5f5f5;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.eliminar-btn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.eliminar-btn:hover {
+    background: darkred;
+}
+
+
+.socio-container {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem;
+  }
+  
+
+  .socio-sidebar {
+    width: 300px;
+    flex-shrink: 0;
+    background-color: #f4f4f4;
+    padding: 1.5rem;
+    border-radius: 12px;
+  }
+  
+  .socio-contenido {
+    flex: 1;
+    width: 100%;
+  }
+  
+
+  .socio-favoritos,
+.socio-reservas {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  width: 100%;
+}
+
+
+.socio-contenido {
+    max-width: none; /* o por ejemplo: 1000px si quieres limitarlo un poco */
+  }
+  
+
+
+  
+  /* Fondo general */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #e0eafc, #cfdef3);
+    color: #333;
+}
+
+/* Contenedor principal con flex */
+.socio-container {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Sidebar */
+.socio-sidebar {
+    width: 280px;
+    background-color: #ffffffd9;
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Imagen de perfil */
+.perfil-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+
+/* Contenido principal */
+.socio-contenido {
+    flex: 1;
+}
+
+/* Secciones (favoritos, reservas, etc.) */
+.socio-favoritos,
+.socio-reservas {
+    background-color: #ffffffd9;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+/* Botones */
+button {
+    background-color: #ff5a5f;
+    color: white;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 0.5rem;
+}
+
+button:hover {
+    background-color: #e0484e;
+}
+
+/* Links en favoritos */
+.favorito-item a {
+    color: #0077cc;
+    text-decoration: none;
+    font-weight: bold;
+}
+.favorito-item a:hover {
+    text-decoration: underline;
+}
+
+
+
+
+
+.hazte-socio-btn {
+    margin-left: 10px;
+    padding: 8px 14px;
+    background-color: white;
+    color: black;
+    border: 2px solid white;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.hazte-socio-btn:hover {
+    background-color: #000;
+    color: #fff;
+}
