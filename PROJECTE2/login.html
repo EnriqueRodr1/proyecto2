@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Iniciar Sesión - Odisea</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f6f6f6;
+    }
+
+    .logo {
+      height: 50px;
+    }
+
+    .form-container {
+      max-width: 500px;
+      margin: 60px auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .form-container h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    input {
+      padding: 12px 16px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 14px;
+      background: #000;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html">
+      <img src="logo.svg" alt="Logo" class="logo">
+    </a>
+  </header>
+
+  <div class="form-container">
+    <h1>Iniciar Sesión</h1>
+    <form onsubmit="loginUsuario(event)">
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="contrasenya" placeholder="Contraseña" required>
+      <button type="submit">Iniciar Sesión</button>
+    </form>
+  </div>
+
+  <script>
+    function loginUsuario(event) {
+      event.preventDefault();
+      const email = document.getElementById("email").value;
+      const contrasenya = document.getElementById("contrasenya").value;
+
+      fetch(`http://18.210.82.24:8001/buscar_socio/?email=${encodeURIComponent(email)}&contrasenya=${encodeURIComponent(contrasenya)}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" }
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (data.socio_id) {
+          alert(`Bienvenido, ${data.nombre}`);
+          window.location.href = `socio.html?email=${encodeURIComponent(email)}`;
+        } else {
+          alert("Credenciales incorrectas");
+        }
+      })
+      .catch(error => {
+        console.error("Error al iniciar sesión:", error);
+        alert("Error al conectar con la API.");
+      });
+    }
+  </script>
+</body>
+</html>
