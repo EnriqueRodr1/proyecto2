@@ -23,7 +23,6 @@
     </div>
 </header>
 
-<!-- FORMULARIO DE RESERVA SPA -->
 <section class="reserva-section">
     <h2>Reserva tu Servicio de Spa</h2>
     <form class="reserva-form" onsubmit="guardarReservaSpa(event)">
@@ -56,28 +55,48 @@
 </footer>
 
 <script>
-function guardarReservaSpa(event) {
-    event.preventDefault(); // Evita que el formulario recargue la página
+    document.addEventListener("DOMContentLoaded", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const email = urlParams.get("email");
 
-    // Obtener datos del formulario
-    let servicio = document.getElementById("servicio").value;
-    let fecha = document.getElementById("fecha").value;
-    let hora = document.getElementById("hora").value;
+        if (!email) {
+            alert("No se ha proporcionado un email.");
+            window.location.href = "index.html";
+            return;
+        }
 
-    // Crear objeto de reserva
-    let reserva = { servicio, fecha, hora };
+        function guardarReservaSpa(event) {
+            event.preventDefault();
 
-    // Guardar en localStorage
-    let reservas = JSON.parse(localStorage.getItem("reservas-spa")) || [];
-    reservas.push(reserva);
-    localStorage.setItem("reservas-spa", JSON.stringify(reservas));
+            const servicio = document.getElementById("servicio").value;
+            const fecha = document.getElementById("fecha").value;
+            const hora = document.getElementById("hora").value;
 
-    // Mensaje en la consola
-    console.log("Se ha hecho la reserva correctamente para el servicio de Spa.");
+            if (!fecha || !hora || !servicio) {
+                alert("Por favor, completa todos los campos.");
+                return;
+            }
 
-    // Opcional: mostrar alerta visual
-    alert("Reserva de Spa realizada con éxito. Puedes verla en tu Área de Socios.");
-}
+            fetch("http://10.210.82.24:8001/reservas_spa/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, servicio, fecha, hora })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Reserva realizada con éxito.");
+                } else {
+                    console.error("Error al realizar la reserva:", data);
+                    alert("Error al realizar la reserva.");
+                }
+            })
+            .catch(error => {
+                console.error("Error al conectar con la API:", error);
+                alert("Error al realizar la reserva.");
+            });
+        }
+    });
 </script>
 
 </body>

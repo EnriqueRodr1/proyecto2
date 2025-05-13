@@ -18,6 +18,9 @@
         <a href="hoteles.html">Hoteles</a>
         <a href="pistas.html">Pistas</a>
     </nav>
+    <div class="icons">
+        <a href="socio.html">Área Socio</a>
+    </div>
 </header>
 
 <!-- SECCIÓN DEL HOTEL -->
@@ -29,30 +32,82 @@
 <!-- HABITACIONES -->
 <section class="habitaciones">
     <h2>Habitaciones Disponibles</h2>
-    
     <div class="habitaciones-grid">
-        <div class="habitacion">
+        <div class="habitacion" data-hotel-id="1" data-tipo="individual">
             <img src="habitacion-individual.jpg" alt="Habitación Individual">
             <h3>Habitación Individual</h3>
             <p>Cama individual, vista al mar, desayuno incluido.</p>
-            <a href="reserva-hotel.html?tipo=individual" class="reserva-btn">Reservar</a>
+            <button class="guardar-btn">❤️ Guardar Favorito</button>
+            <button class="reserva-btn">Reservar</button>
         </div>
-
-        <div class="habitacion">
+        <div class="habitacion" data-hotel-id="1" data-tipo="doble">
             <img src="habitacion-doble.jpg" alt="Habitación Doble">
             <h3>Habitación Doble</h3>
             <p>Cama king-size, balcón privado, jacuzzi.</p>
-            <a href="reserva-hotel.html?tipo=doble" class="reserva-btn">Reservar</a>
+            <button class="guardar-btn">❤️ Guardar Favorito</button>
+            <button class="reserva-btn">Reservar</button>
         </div>
-
-        <div class="habitacion">
+        <div class="habitacion" data-hotel-id="1" data-tipo="familiar">
             <img src="habitacion-familiar.jpg" alt="Habitación Familiar">
             <h3>Habitación Familiar</h3>
             <p>Dos camas dobles, sala de estar, desayuno incluido.</p>
-            <a href="reserva-hotel.html?tipo=familiar" class="reserva-btn">Reservar</a>
+            <button class="guardar-btn">❤️ Guardar Favorito</button>
+            <button class="reserva-btn">Reservar</button>
         </div>
     </div>
 </section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const email = urlParams.get("email");
+
+        if (!email) {
+            alert("No se ha proporcionado un email.");
+            window.location.href = "index.html";
+            return;
+        }
+
+        document.querySelectorAll(".guardar-btn").forEach(btn => {
+            btn.addEventListener("click", async function () {
+                const hotelId = this.closest(".habitacion").dataset.hotelId;
+                const tipo = this.closest(".habitacion").dataset.tipo;
+                try {
+                    await fetch("http://18.210.82.24:8001/favoritos/", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ email, tipo: "habitacion", nombre: tipo })
+                    });
+                    alert("Habitación guardada como favorito");
+                } catch (error) {
+                    console.error("Error al guardar favorito:", error);
+                }
+            });
+        });
+
+        document.querySelectorAll(".reserva-btn").forEach(btn => {
+            btn.addEventListener("click", async function () {
+                const hotelId = this.closest(".habitacion").dataset.hotelId;
+                const tipo = this.closest(".habitacion").dataset.tipo;
+                const fecha = prompt("Ingrese la fecha de la reserva (YYYY-MM-DD):");
+                const noches = prompt("Ingrese el número de noches:");
+
+                if (fecha && noches) {
+                    try {
+                        await fetch("http://18.210.82.24:8001/reservas_hotel/", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ email, hotel_id: hotelId, tipo_habitacion: tipo, fecha, noches })
+                        });
+                        alert("Reserva realizada con éxito");
+                    } catch (error) {
+                        console.error("Error al realizar la reserva:", error);
+                    }
+                }
+            });
+        });
+    });
+</script>
 
 <footer>
     <div class="footer-content">

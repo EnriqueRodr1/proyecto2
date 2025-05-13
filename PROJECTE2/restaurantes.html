@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurantes</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
 </head>
 <body>
 
-<!-- HEADER -->
 <header>
     <div class="logo">
         <a href="index.html"><img src="logo.svg" alt="Logo"></a>
@@ -18,90 +18,81 @@
         <a href="spa.html">Spa</a>
         <a href="hoteles.html">Hoteles</a>
         <a href="pistas.html">Pistas</a>
-    </nav>
-    <div class="icons">
         <a href="socio.html">Área Socio</a>
-    </div>
+    </nav>
 </header>
 
-    <!-- SECCIÓN RESTAURANTES -->
-    <section class="restaurants">
-        <div class="restaurant">
-            <img src="restaurante1.jpg" alt="Metropolitan Abascal">
-            <div class="restaurant-info">
-                <h3>Metropolitan Abascal</h3>
-                <p>C/ José Abascal, 46, 28003 Madrid</p>
-                <p>91441633-66638142</p>
-                <p>Lunes a Viernes de 8:30 a 20:30 h</p>
-                <p>Sábados de 9:30 a 13:30 h</p>
-                <p>Domingos y festivos cerrados</p>
-                <button onclick="guardarFavorito('Metropolitan Abascal', 'restaurantes.html')" class="guardar-btn">
-                    <i class="fas fa-heart"></i> Guardar
-                </button>               
-                <a href="reservas.html">
-                    <button class="reserva-btn">Hacer una Reserva</button>
-                </a>                
-                <a href="carta.html" class="btn">Carta Desayuno →</a>
-                <a href="menus-diarios.html" class="btn">Menús Diarios →</a>
-                <a href="mapa.html" class="btn">Ver mapa →</a>                
-            </div>
+<section class="restaurants">
+    <div class="restaurant" data-nombre="Metropolitan Abascal">
+        <img src="restaurante1.jpg" alt="Metropolitan Abascal">
+        <div class="restaurant-info">
+            <h3>Metropolitan Abascal</h3>
+            <p>C/ José Abascal, 46, 28003 Madrid</p>
+            <button class="guardar-btn">❤️ Guardar Favorito</button>
+            <button class="reserva-btn">Hacer una Reserva</button>
         </div>
+    </div>
 
-        <div class="restaurant">
-            <img src="restaurante2.jpg" alt="Metropolitan Iradier">
-            <div class="restaurant-info">
-                <h3>Metropolitan Iradier</h3>
-                <p>C/ Escoles Pies, 105 – 08017 Barcelona</p>
-                <p>Contacto: 93 254 00 55</p>
-                <p>restaurante.iradier@clubmetropolitan.com</p>
-                <p>De lunes a viernes de 7:00 h a 21:30 h.</p>
-                <p>Sábados, domingos y festivos de 9:00 a 20:00 h.</p>
-                <a href="reservas.html">
-                    <button class="reserva-btn">Hacer una Reserva</button>
-                </a>
-                <a href="carta.html" class="btn">Carta Desayuno →</a>
-                <a href="menus-diarios.html" class="btn">Menús Diarios →</a>
-                <a href="mapa.html" class="btn">Ver mapa →</a>
-            </div>
+    <div class="restaurant" data-nombre="Metropolitan Iradier">
+        <img src="restaurante2.jpg" alt="Metropolitan Iradier">
+        <div class="restaurant-info">
+            <h3>Metropolitan Iradier</h3>
+            <p>C/ Escoles Pies, 105 – 08017 Barcelona</p>
+            <button class="guardar-btn">❤️ Guardar Favorito</button>
+            <button class="reserva-btn">Hacer una Reserva</button>
         </div>
+    </div>
+</section>
 
-        <div class="restaurant">
-            <img src="restaurante3.jpg" alt="Metropolitan Sagrada Familia">
-            <div class="restaurant-info">
-                <h3>Metropolitan Sagrada Familia</h3>
-                <p>Calle Provenza 408, 08025 Barcelona</p>
-                <p>935073238-66638314</p>
-                <p>De lunes a viernes de 8:30 a 13:30 h</p>
-                <p>Sábados de 9:00 a 13:00 h</p>
-                <p>Domingos y festivos cerrados</p>
-                <a href="reservas.html">
-                    <button class="reserva-btn">Hacer una Reserva</button>
-                </a>  
-                <a href="carta.html" class="btn">Carta Desayuno →</a>
-                <a href="menus-diarios.html" class="btn">Menús Diarios →</a>
-                <a href="mapa.html" class="btn">Ver mapa →</a>                
-            </div>
-        </div>
-    </section>
-    <script>
-        function guardarFavorito(nombre, url) {
-    let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
-    favoritos.push({ nombre, url });
-    localStorage.setItem("favoritos", JSON.stringify(favoritos));
-}
-    </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const email = urlParams.get("email");
 
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-content">
-            <p>© 2025 Metropolitan. Todos los derechos reservados.</p>
-            <ul>
-                <li><a href="aviso-legal.html">Aviso Legal</a></li>
-                <li><a href="politica-privacidad.html">Política de Privacidad</a></li>
-                <li><a href="cookies.html">Política de Cookies</a></li>
-            </ul>
-        </div>
-    </footer>
+        if (!email) {
+            alert("No se ha proporcionado un email.");
+            window.location.href = "index.html";
+            return;
+        }
+
+        document.querySelectorAll(".guardar-btn").forEach(btn => {
+            btn.addEventListener("click", async function () {
+                const restaurantName = this.closest(".restaurant").dataset.nombre;
+                try {
+                    await fetch("http://10.210.82.24:8001/favoritos/", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ email, tipo: "restaurante", nombre: restaurantName })
+                    });
+                    alert("Favorito guardado");
+                } catch (error) {
+                    console.error("Error al guardar favorito:", error);
+                }
+            });
+        });
+
+        document.querySelectorAll(".reserva-btn").forEach(btn => {
+            btn.addEventListener("click", async function () {
+                const restaurantName = this.closest(".restaurant").dataset.nombre;
+                const fecha = prompt("Ingrese la fecha de la reserva (YYYY-MM-DD):");
+                const hora = prompt("Ingrese la hora de la reserva (HH:MM):");
+
+                if (fecha && hora) {
+                    try {
+                        await fetch("http://10.210.82.24:8001/reservas_restaurante/", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ email, restaurante: restaurantName, fecha, hora })
+                        });
+                        alert("Reserva realizada con éxito");
+                    } catch (error) {
+                        console.error("Error al realizar la reserva:", error);
+                    }
+                }
+            });
+        });
+    });
+</script>
 
 </body>
 </html>

@@ -13,25 +13,22 @@
     <!-- HEADER -->
     <header>
         <div class="logo">
-            <a href="#"><img src="logo.svg" alt="Logo"></a>
+            <a href="index.html"><img src="logo.svg" alt="Logo"></a>
         </div>
         <nav class="nav-links">
             <a href="restaurantes.html">Restaurantes</a>
             <a href="spa.html">Spa</a>
             <a href="hoteles.html">Hoteles</a>
             <a href="pistas.html">Pistas</a>
-        </nav>
+        </nav>      
         <div class="icons">
-            <a href="socio.html"><i class="fas fa-user"></i></a>
+            <a href="login.html">Unete</a>
+            <a href="socio.html">Área Socio</a>
+            <a href="registro.html" class="hazte-socio-btn">Hazte Socio</a>
         </div>
+        
     </header>
 
-    <nav class="mobile-menu">
-        <a href="#">Restaurantes</a>
-        <a href="#">Spa</a>
-        <a href="#">Hoteles</a>
-        <a href="#">Pistas</a>
-    </nav>
 
     <!-- SLIDER PRINCIPAL -->
     <section class="slider">
@@ -113,6 +110,49 @@
 
         <p class="footer-copy">&copy; 2025 Club Exclusivo. Todos los derechos reservados.</p>
     </footer>
+
+    <script>
+        // SLIDER PRINCIPAL AUTO
+let slideIndex = 0;
+const slides = document.querySelectorAll('.slider-container .slide');
+const nextBtn = document.querySelector('.slider .next');
+const prevBtn = document.querySelector('.slider .prev');
+
+function showSlide(index) {
+    slides.forEach(slide => slide.classList.remove('active'));
+    slides[index].classList.add('active');
+}
+
+function nextSlide() {
+    slideIndex = (slideIndex + 1) % slides.length;
+    showSlide(slideIndex);
+}
+
+function prevSlide() {
+    slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+    showSlide(slideIndex);
+}
+
+nextBtn?.addEventListener('click', nextSlide);
+prevBtn?.addEventListener('click', prevSlide);
+
+setInterval(nextSlide, 5000); // cada 5 segundos
+
+// SLIDER DE SERVICIOS AUTO
+let currentService = 0;
+const serviceSlides = document.querySelectorAll('.service-slide');
+
+function showServiceSlide(index) {
+    serviceSlides.forEach(slide => slide.classList.remove('active'));
+    serviceSlides[index].classList.add('active');
+}
+
+setInterval(() => {
+    currentService = (currentService + 1) % serviceSlides.length;
+    showServiceSlide(currentService);
+}, 6000); // cada 6 segundos
+
+    </script>
 
 </body>
 </html>

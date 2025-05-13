@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SPA & Bienestar - Odisea</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
 </head>
 <body>
 
@@ -17,64 +18,84 @@
         <a href="spa.html">Spa</a>
         <a href="hoteles.html">Hoteles</a>
         <a href="pistas.html">Pistas</a>
+        <a href="socio.html">Área Socio</a>
     </nav>
 </header>
 
-<!-- SECCIÓN PRINCIPAL DEL SPA -->
 <section class="spa-banner">
     <h1>Bienvenido al Spa & Wellness de Odisea</h1>
     <p>Un oasis de relajación y bienestar diseñado para desconectar del estrés diario.</p>
 </section>
 
-<!-- INFORMACIÓN DEL SPA -->
 <section class="spa-info">
-    <h2>Descubre nuestras instalaciones</h2>
-    <p>En Odisea Spa, te ofrecemos un espacio exclusivo con los mejores servicios para tu bienestar.</p>
-    
+    <h2>Servicios del Spa</h2>
     <div class="spa-grid">
-        <div class="spa-item">
+        <div class="spa-item" data-servicio="Jacuzzi">
             <img src="jacuzzi.jpg" alt="Jacuzzi">
             <h3>Jacuzzi & Balneario</h3>
             <p>Sumérgete en un jacuzzi con agua termal para revitalizar cuerpo y mente.</p>
+            <button class="guardar-btn">❤️ Guardar Favorito</button>
+            <button class="reserva-btn">Reservar</button>
         </div>
-        
-        <div class="spa-item">
+        <div class="spa-item" data-servicio="Masajes">
             <img src="masajes.jpg" alt="Salón de Masajes">
             <h3>Salón de Masajes</h3>
             <p>Disfruta de masajes terapéuticos con nuestros expertos en relajación.</p>
-        </div>
-        
-        <div class="spa-item">
-            <img src="fitness.jpg" alt="Sala Fitness">
-            <h3>Sala Fitness</h3>
-            <p>Accede a nuestra moderna sala de ejercicios con equipo de última generación.</p>
-        </div>
-    </div>
-</section>
-
-<!-- HORARIOS Y RESERVAS -->
-<section class="spa-horarios">
-    <h2>Horarios</h2>
-    <p><strong>Lunes a Viernes:</strong> 9:00 AM - 9:00 PM</p>
-    <p><strong>Sábados y Domingos:</strong> 10:00 AM - 8:00 PM</p>
-
-    <div class="reserva-btn-container">
-        <a href="reservas-spa.html">
+            <button class="guardar-btn">❤️ Guardar Favorito</button>
             <button class="reserva-btn">Reservar</button>
-        </a>
+        </div>
     </div>
 </section>
 
-<footer>
-    <div class="footer-content">
-        <p>© 2025 Metropolitan. Todos los derechos reservados.</p>
-        <ul>
-            <li><a href="aviso-legal.html">Aviso Legal</a></li>
-            <li><a href="politica-privacidad.html">Política de Privacidad</a></li>
-            <li><a href="cookies.html">Política de Cookies</a></li>
-        </ul>
-    </div>
-</footer>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const email = urlParams.get("email");
+
+        if (!email) {
+            alert("No se ha proporcionado un email.");
+            window.location.href = "index.html";
+            return;
+        }
+
+        document.querySelectorAll(".guardar-btn").forEach(btn => {
+            btn.addEventListener("click", async function () {
+                const servicio = this.closest(".spa-item").dataset.servicio;
+                try {
+                    await fetch("http://10.210.82.24:8001/favoritos/", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ email, tipo: "spa", nombre: servicio })
+                    });
+                    alert("Favorito guardado");
+                } catch (error) {
+                    console.error("Error al guardar favorito:", error);
+                }
+            });
+        });
+
+        document.querySelectorAll(".reserva-btn").forEach(btn => {
+            btn.addEventListener("click", async function () {
+                const servicio = this.closest(".spa-item").dataset.servicio;
+                const fecha = prompt("Ingrese la fecha de la reserva (YYYY-MM-DD):");
+                const hora = prompt("Ingrese la hora de la reserva (HH:MM):");
+
+                if (fecha && hora) {
+                    try {
+                        await fetch("http://10.210.82.24:8001/reservas_spa/", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ email, servicio, fecha, hora })
+                        });
+                        alert("Reserva realizada con éxito");
+                    } catch (error) {
+                        console.error("Error al realizar la reserva:", error);
+                    }
+                }
+            });
+        });
+    });
+</script>
 
 </body>
 </html>
